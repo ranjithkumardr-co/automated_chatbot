@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+
+
+  </head>
+  <body>
+  <div id="navbar">
+        <h1>Automated Healthcare Chatbot</h1>
+    </div>
+    <hr class="new">
+    <div class="container" onclick="myFunction(this)">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+    </div>
+  <div id="mySidenav" class="sidenav">
+       <button onclick="document.getElementById('id01').style.display='block'"  id="about">ABOUT</button>
+        <a href="https://www.practo.com/doctors"  id="blog">consult</a>
+        <button onclick="document.getElementById('id02').style.display='block'"  id="projects">feedback</button>
+  </div>
+  <div id="id01" class="w3-modal">
+  <div class="w3-modal-content w3-animate-zoom modal" >
+
+    <header>
+      <span onclick="document.getElementById('id01').style.display='none'"
+      class="w3-button w3-black w3-display-topright">&times;</span>
+      <h2 id="abou">About</h2>
+    </header>
+
+    <div id="defnition">
+      <p style="height:50%; margin:1.5em; width:97%;">
+        About ChatterBot
+          ChatterBot is a Python library that makes it easy to generate automated responses to a user’s input. ChatterBot uses a selection of machine learning algorithms to produce different types of responses. This makes it easy for developers to create chat bots and automate conversations with users. For more details about the ideas and concepts behind ChatterBot see the process flow diagram.
+
+An example of typical input would be something like this:
+
+user: Good morning! How are you doing?
+bot:  I am doing very well, thank you for asking.
+user: You're welcome.
+bot:  Do you like hats?
+Language Independence
+The language independent design of ChatterBot allows it to be trained to speak any language. Additionally, the machine-learning nature of ChatterBot allows an agent instance to improve it’s own knowledge of possible responses as it interacts with humans and other sources of informative data.
+
+How ChatterBot Works
+ChatterBot is a Python library designed to make it easy to create software that can engage in conversation.
+
+An untrained instance of ChatterBot starts off with no knowledge of how to communicate. Each time a user enters a statement, the library saves the text that they entered and the text that the statement was in response to. As ChatterBot receives more input the number of responses that it can reply and the accuracy of each response in relation to the input statement increase.
+
+The program selects the closest matching response by searching for the closest matching known statement that matches the input, it then chooses a response from the selection of known responses to that statement.
+
+Process flow diagram
+        ChatterBot process flow diagram</p>
+
+    </div>
+
+  </div>
+</div>
+
+
+
+    <div id="id02" class="w3-modal">
+  <div class="w3-modal-content w3-animate-zoom modal1" >
+
+    <header>
+      <span onclick="document.getElementById('id02').style.display='none'"
+      class="w3-button w3-black w3-display-topright">&times;</span>
+      <h2 id="abou2">FEEDBACK</h2>
+    </header>
+
+    <div id="defnition2">
+      <p style="height:50%; margin:1.5em; width:97%;">
+       <div class="container1">
+  <form action="store.php">
+
+    <label for="fname">First Name</label>
+    <input type="text" id="fname" name="name" placeholder="Your name..">
+
+    <label for="lname">Last Name</label>
+    <input type="text" id="lname" name="email" placeholder="Your last name..">
+
+
+    <label for="subject">Comments</label>
+    <textarea id="subject" name="comments" placeholder="Write something" style="height:150px"></textarea>
+
+      <button type="submit" id="sub">submit</button>
+
+  </form>
+</div></p>
+
+    </div>
+
+  </div>
+</div>
+      <div id="id03" class="w3-modal">
+  <div class="w3-modal-content w3-animate-zoom modal1" >
+  <div id="content">
+   <iframe width="560" height="315" src="https://www.youtube.com/embed/oFUmyHA1hD4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+  </div>
+      </div>
+
+      <div id="chatbox">
+        <p class="botText"><span>Please try typing full sentences as I am still learning!</span></p>
+        <p class="botText"><span>I am a chatbot. You can begin conversation by typing in a message and pressing enter.</span></p>
+        <p class="botText"><span>Hi There! What is your name?</span></p>
+      </div>
+      <div id="userInput">
+        <input id="textInput" class="w3-input" type="text" name="msg" placeholder="Message">
+        <input id="buttonInput" type="submit" value="Send">
+           <a href="/logout">Logout</a>
+      </div>
+
+
+      <script>
+        function getBotResponse() {
+          var rawText = $("#textInput").val();
+          var userHtml = '<p class="userText"><span>' + rawText + '</span></p>';
+          $("#textInput").val("");
+          $("#chatbox").append(userHtml);
+          document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+          $.get("/get", { msg: rawText }).done(function(data) {
+            var botHtml = '<p class="botText"><span>' + data + '</span></p>';
+            $("#chatbox").append(botHtml);
+            document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+          });
+        }
+        $("#textInput").keypress(function(e) {
+            if(e.which == 13) {
+                getBotResponse();
+            }
+        });
+        $("#buttonInput").click(function() {
+          getBotResponse();
+        })
+      </script>
+    </div>
+  <script>
+            function myFunction(x) {
+                x.classList.toggle("change");
+            }
+        </script>
+
+  <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/7573813.js"></script>
+
+    </body>
+</html>
